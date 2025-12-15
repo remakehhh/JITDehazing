@@ -139,7 +139,8 @@ events.out.tfevents.*
 
 # Data
 data/
-datasets/
+# Note: datasets/ directory contains Python code, not data
+# Data files should go in data/ directory instead
 *.h5
 *.hdf5
 
