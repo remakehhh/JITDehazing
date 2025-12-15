@@ -1,0 +1,162 @@
+# Default Configuration for JiT-RSHazeDiff Model
+
+# Model Configuration
+model:
+  # Base channel dimension
+  ch: 128
+  
+  # Channel multipliers for each resolution level
+  ch_mult: [1, 2, 2, 4]
+  
+  # Number of residual blocks per resolution level
+  num_res_blocks: 2
+  
+  # Resolutions at which to apply attention
+  attn_resolutions: [32, 16]
+  
+  # Dropout rate
+  dropout: 0.1
+  
+  # Number of attention heads
+  num_heads: 8
+  
+  # Input image channels
+  in_channels: 3
+  
+  # Output image channels
+  out_channels: 3
+  
+  # Input image resolution
+  resolution: 256
+
+# Diffusion Process Configuration
+diffusion:
+  # Beta schedule type: 'linear', 'cosine', or 'quad'
+  beta_schedule: linear
+  
+  # Starting beta value
+  beta_start: 0.0001
+  
+  # Ending beta value
+  beta_end: 0.02
+  
+  # Total number of diffusion timesteps
+  num_diffusion_timesteps: 1000
+  
+  # Number of sampling timesteps (for DDIM)
+  sampling_timesteps: 10
+  
+  # Model variance type: 'fixedlarge' or 'fixedsmall'
+  model_var_type: fixedlarge
+  
+  # Loss type: 'l1' or 'l2'
+  loss_type: l2
+
+# Data Configuration
+data:
+  # Training data directory
+  train_dir: ./data/train
+  
+  # Validation data directory
+  val_dir: ./data/val
+  
+  # Test data directory
+  test_dir: ./data/test
+  
+  # Image size for training
+  image_size: 256
+  
+  # Batch size
+  batch_size: 8
+  
+  # Number of data loading workers
+  num_workers: 4
+  
+  # Data augmentation
+  augment: true
+
+# Training Configuration
+training:
+  # Number of training epochs
+  epochs: 200
+  
+  # Learning rate
+  lr: 0.0002
+  
+  # Weight decay
+  weight_decay: 0.0
+  
+  # EMA decay rate
+  ema_rate: 0.9999
+  
+  # Gradient clipping
+  grad_clip: 1.0
+  
+  # Checkpoint save interval (epochs)
+  save_interval: 10
+  
+  # Logging interval (iterations)
+  log_interval: 100
+  
+  # Validation interval (epochs)
+  val_interval: 5
+  
+  # Resume from checkpoint
+  resume: null
+  
+  # Use EMA for validation
+  use_ema: true
+  
+  # Device
+  device: cuda
+  
+  # Random seed
+  seed: 42
+
+# Evaluation Configuration
+evaluation:
+  # Checkpoint path
+  checkpoint: ./checkpoints/latest.pth
+  
+  # Number of DDIM sampling steps
+  ddim_steps: 10
+  
+  # DDIM eta (0 = deterministic, 1 = stochastic like DDPM)
+  ddim_eta: 0.0
+  
+  # Output directory for results
+  output_dir: ./results
+  
+  # Save intermediate steps
+  save_intermediates: false
+  
+  # Calculate metrics
+  calculate_metrics: true
+
+# Logging Configuration
+logging:
+  # TensorBoard log directory
+  log_dir: ./logs
+  
+  # Save sample images during training
+  save_samples: true
+  
+  # Number of sample images to save
+  num_samples: 4
+  
+  # Sample save interval (epochs)
+  sample_interval: 5
+
+# Distributed Training Configuration
+distributed:
+  # Enable distributed training
+  enabled: false
+  
+  # Backend: 'nccl' or 'gloo'
+  backend: nccl
+  
+  # World size (number of GPUs)
+  world_size: 1
+  
+  # Rank of current process
+  rank: 0
